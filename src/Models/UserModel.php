@@ -49,11 +49,13 @@ class UserModel
     /**
      * Inserts new user into database - registering.
      */
-    public function insertNewUserToDb(string $registerEmail, string $registerPassword): bool
+    public function insertNewUserToDb(string $registerUsername, string $registerDescription, string $registerEmail, string $registerPassword): bool
     {
         $query = $this->db->prepare(
-            "INSERT INTO `users` (`email`, `password`) VALUES (:email, :password);"
+            "INSERT INTO `users` (`username`, `description`, `email`, `password`) VALUES (:username, :description, :email, :password);"
         );
+        $query->bindParam(':username', $registerUsername);
+        $query->bindParam(':description', $registerDescription);
         $query->bindParam(':email', $registerEmail);
         $query->bindParam(':password', $registerPassword);
         return $query->execute();
