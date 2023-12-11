@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Controllers\CoursesAPIController;
+use App\Controllers\LoginController;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
@@ -17,5 +19,5 @@ return function (App $app) {
     });
 
     $app->get('/courses', CoursesAPIController::class);
-
+    $app->post('/login', LoginController::class);
 };

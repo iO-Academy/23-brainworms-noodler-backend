@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Abstracts\Controller;
+use App\Models\UserModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 

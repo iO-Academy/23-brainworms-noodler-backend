@@ -12,7 +12,7 @@ use Slim\Views\PhpRenderer;
 return function (ContainerBuilder $containerBuilder) {
     $container = [];
 
-    $container[PDO::class] = DI\factory(\App\Factories\PDOFactory::class);
+    $container[PDO::class] = DI\factory(PDOFactory::class);
     $container[LoggerInterface::class] = DI\factory(LoggerFactory::class);
     $container[PhpRenderer::class] = DI\factory(RendererFactory::class);
 
