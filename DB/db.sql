@@ -14,11 +14,11 @@ CREATE TABLE `users` (
                          `password` varchar(255) NOT NULL,
                          PRIMARY KEY(`id`)
 );
-INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (1, 'tiago', 'i like noodles', 'tiago@noodles.com', 'ilikenoodles');
+INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (1, 'Tiago', 'i like noodles', 'tiago@noodles.com', 'ilikenoodles');
 
 INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (2, 'Neil', 'noodles are the best', 'neil@noodles.com', 'noodlesforever');
 
-INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (3, 'Andre', 'noodles are my favorite food', 'andre@noodles.com', 'noodlesforlive');
+INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (3, 'Andrej', 'noodles are my favorite food', 'andre@noodles.com', 'noodlesforlife');
 
 
 
@@ -26,7 +26,7 @@ CREATE TABLE `noodles` (
                            `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                            `user_id`int(11) unsigned NOT NULL,
                            `time` TIMESTAMP NOT NULL,
-                           `noodle` VARCHAR(500),
+                           `noodle` VARCHAR(500) NOT NULL,
                            PRIMARY KEY(`id`),
                            CONSTRAINT `fk_users` FOREIGN KEY (user_id) REFERENCES `users`(`id`)
 
