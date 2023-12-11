@@ -16,9 +16,9 @@ CREATE TABLE `users` (
 );
 INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (1, 'Tiago', 'i like noodles', 'tiago@noodles.com', 'ilikenoodles');
 
-INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (2, 'Neil', 'noodles are the best', 'neil@noodles.com', 'noodlesforever');
+INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (2, 'Neal', 'noodles are the best', 'neal@noodles.com', 'noodlesforever');
 
-INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (3, 'Andrej', 'noodles are my favorite food', 'andre@noodles.com', 'noodlesforlife');
+INSERT INTO `users` (`id`, `username`, `description`, `email`, `password`) VALUES (3, 'Andrej', 'noodles are my favorite food', 'andrej@noodles.com', 'noodlesforlife');
 
 
 
