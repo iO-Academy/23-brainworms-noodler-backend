@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Controllers\CoursesAPIController;
 use App\Controllers\LoginController;
 use App\Controllers\RegisterController;
+use App\Controllers\UserController;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
@@ -22,4 +23,5 @@ return function (App $app) {
     $app->get('/courses', CoursesAPIController::class);
     $app->post('/login', LoginController::class);
     $app->post('/register', RegisterController::class);
+    $app->get('/users/{id}', UserController::class);
 };
