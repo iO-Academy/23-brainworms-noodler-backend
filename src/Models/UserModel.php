@@ -23,7 +23,7 @@ class UserModel
     public function getUserByEmail($userEmail): array
     {
         if ($this->validateEmail($userEmail) !== false) {
-            $query = $this->db->prepare("SELECT `email`, `password` FROM `users` WHERE `email` = :email;");
+            $query = $this->db->prepare("SELECT `id`, `email`, `password` FROM `users` WHERE `email` = :email;");
             $query->bindParam(':email', $userEmail);
             $query->execute();
             return $query->fetch();
@@ -66,5 +66,13 @@ class UserModel
     private function validateEmail($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+    public function getUserDataById($userId)
+    {
+        $query = $this->db->prepare("SELECT `username`, `description` FROM `users` WHERE `id` = :id;");
+        $query->bindParam(':id', $userId);
+        $query->execute();
+        return $query->fetch();
     }
 }

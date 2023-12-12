@@ -21,7 +21,7 @@ class LoginController extends Controller
      */
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $data = ['success' => false, 'msg' => 'Incorrect email or password.', 'data' => []];
+        $data = ['success' => false, 'msg' => 'Incorrect email or password.', 'userId' => []];
         $statusCode = 401;
         $_SESSION['loggedIn'] = false;
 
@@ -37,6 +37,7 @@ class LoginController extends Controller
         if ($result) {
             $data['success'] = $result;
             $data['msg'] = 'Valid user';
+            $data['userId'] = $user['id'];
             $_SESSION['loggedIn'] = true;
             $statusCode = 200;
         }
