@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+
 class UserEntity implements \JsonSerializable
 {
     private int $id;
