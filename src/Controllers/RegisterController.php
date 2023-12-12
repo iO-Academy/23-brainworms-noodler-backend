@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controllers;
 
 use App\Abstracts\Controller;
@@ -18,13 +17,11 @@ class RegisterController extends Controller
         $this->userModel = $userModel;
     }
 
-    /**
-     * Verifies user credentials then returns message and status code with login success status and attached message.
-     */
     public function __invoke(Request $request, Response $response, array $args): Response
     {
+        $data = ['success' => true, 'msg' => 'Added new user to database', 'data' => []];
         $parsedBody = $request->getParsedBody();
         $result = $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $parsedBody['email'], $parsedBody['password']);
-        return $this->respondWithJson($response, 'withtest');
+        return $this->respondWithJson($response, $data);
     }
 }
