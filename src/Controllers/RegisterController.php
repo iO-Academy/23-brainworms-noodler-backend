@@ -21,7 +21,8 @@ class RegisterController extends Controller
     {
         $data = ['success' => true, 'msg' => 'Added new user to database', 'data' => []];
         $parsedBody = $request->getParsedBody();
-        $result = $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $parsedBody['email'], $parsedBody['password']);
+
+       $data['userId'] = $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $parsedBody['email'], $parsedBody['password']);
         return $this->respondWithJson($response, $data);
     }
 }
