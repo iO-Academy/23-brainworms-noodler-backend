@@ -31,16 +31,23 @@ class UserModel
         return [];
     }
 
-    public function getUserIdByEmail($userEmail): array
+    public function getUserByEmailOrUsername($userEmail, $username): array
     {
         if ($this->validateEmail($userEmail) !== false) {
-            $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `email` = :email;");
+            $query = $this->db->prepare("SELECT `email`, `username` FROM `users` WHERE `email` = :email OR `username` = :username;");
             $query->bindParam(':email', $userEmail);
+            $query->bindParam(':username', $username);
             $query->execute();
-            return $query->fetch();
+            $result = $query->fetch();
+            if($result) {
+                return $result;
+            } else {
+                return [];
+            }
         }
         return [];
     }
+
 
     /**
      * Verifies user credentials by comparing form input with email and hashed password in database
@@ -77,10 +84,11 @@ class UserModel
      *
      * @return mixed returns the email as a string if its a valid email otherwise it returns false
      */
-    private function validateEmail($email)
+    public function validateEmail($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
+
 
     public function getUserDataById($userId)
     {
