@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use App\Factories\Entities\UserEntity;
 use PDO;
 
 class UserModel
@@ -70,11 +71,11 @@ class UserModel
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
-    public function getUserDataById($userId)
+    public function getUserDataById($userId): ?UserEntity
     {
         $query = $this->db->prepare("SELECT `username`, `description` FROM `users` WHERE `id` = :id;");
-        $query->bindParam(':id', $userId);
-        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, UserEntity::class);
+        $query->execute([$userId]);
         return $query->fetch();
     }
 }
