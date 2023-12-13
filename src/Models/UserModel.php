@@ -3,7 +3,7 @@
 
 namespace App\Models;
 
-use App\Factories\Entities\UserEntity;
+use App\Entities\UserEntity;
 use PDO;
 
 class UserModel
@@ -97,9 +97,10 @@ class UserModel
 
     public function getUserDataById($userId): ?UserEntity
     {
-        $query = $this->db->prepare("SELECT `username`, `description` FROM `users` WHERE `id` = :id;");
+        $query = $this->db->prepare("SELECT `id`, `username`, `description`, `email` FROM `users` WHERE `id` = :id;");
+        $query->bindParam('id', $userId);
         $query->setFetchMode(PDO::FETCH_CLASS, UserEntity::class);
-        $query->execute([$userId]);
+        $query->execute();
         return $query->fetch();
     }
 }
