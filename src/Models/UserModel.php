@@ -26,7 +26,12 @@ class UserModel
             $query = $this->db->prepare("SELECT `id`, `email`, `password` FROM `users` WHERE `email` = :email;");
             $query->bindParam(':email', $userEmail);
             $query->execute();
-            return $query->fetch();
+            $result = $query->fetch();
+            if($result) {
+                return $result;
+            } else {
+                return [];
+            }
         }
         return [];
     }
@@ -55,7 +60,7 @@ class UserModel
     public function userLoginVerify(string $userEmail, string $password, $userCredentials): bool
     {
         if (
-            (is_array($userCredentials)) &&
+            (!empty($userCredentials)) &&
             ($userEmail === $userCredentials['email']) &&
             (password_verify($password, $userCredentials['password']))
         ) {
