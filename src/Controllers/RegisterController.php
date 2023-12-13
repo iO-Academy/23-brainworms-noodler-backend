@@ -26,6 +26,7 @@ class RegisterController extends Controller
         $validEmail = $this->userModel->validateEmail($email);
         $checkEmailOrUsernameExist = $this->userModel->getUserByEmailOrUsername($email, $username);
         $data = ['success' => false, 'msg' => 'Unknown error'];
+        $statusCode = 401;
 
         if (!$validEmail) {
             $data['msg'] = 'Invalid email address';
@@ -41,12 +42,14 @@ class RegisterController extends Controller
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $newUserId = $this->userModel->insertNewUserToDb($username, $parsedBody['description'], $email, $hashedPassword);
                 $data = ['success' => true, 'msg' => 'Added new user to database', 'userId' => $newUserId];
+                $statusCode = 200;
             }
+
         } elseif ($checkEmailOrUsernameExist['email'] === $email) {
             $data['msg'] = 'Email already used';
         } elseif ($checkEmailOrUsernameExist['username'] === $username) {
             $data['msg'] = 'Username already used';
         }
-        return $this->respondWithJson($response, $data);
+        return $this->respondWithJson($response, $data, $statusCode);
     }
 }
