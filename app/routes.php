@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controllers\AddNoodleController;
 use App\Controllers\LoginController;
 use App\Controllers\NoodleController;
 use App\Controllers\RegisterController;
@@ -28,4 +29,5 @@ return function (App $app) {
     $app->post('/register', RegisterController::class);
     $app->get('/users/{id}', UserController::class);
     $app->get('/noodles/{id}', NoodleController::class);
+    $app->post('/noodles', AddNoodleController::class);
 };
