@@ -23,11 +23,7 @@ class RegisterController extends Controller
         $email = $parsedBody['email'];
         $hashedPassword = password_hash($parsedBody['password'], PASSWORD_DEFAULT);
 
-        $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $email, $hashedPassword);
-
-        $newUser = $this->userModel->getUserIdByEmail($email);
-
-        $newUserId = $newUser['id'];
+        $newUserId = $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $email, $hashedPassword);
 
         $data = ['success' => true, 'msg' => 'Added new user to database', 'userId' => $newUserId];
 

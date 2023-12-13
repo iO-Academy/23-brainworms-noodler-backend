@@ -60,7 +60,7 @@ class UserModel
     /**
      * Inserts new user into database - registering.
      */
-    public function insertNewUserToDb(string $registerUsername, string $registerDescription, string $registerEmail, string $registerPassword): bool
+    public function insertNewUserToDb(string $registerUsername, string $registerDescription, string $registerEmail, string $registerPassword): int
     {
         $query = $this->db->prepare(
             "INSERT INTO `users` (`username`, `description`, `email`, `password`) VALUES (:username, :description, :email, :password);"
@@ -69,7 +69,8 @@ class UserModel
         $query->bindParam(':description', $registerDescription);
         $query->bindParam(':email', $registerEmail);
         $query->bindParam(':password', $registerPassword);
-        return $query->execute();
+        $query->execute();
+        return $this->db->lastInsertId();
     }
 
     /** Validates if parameter is an email
