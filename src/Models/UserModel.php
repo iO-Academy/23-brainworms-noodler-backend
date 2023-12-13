@@ -31,6 +31,17 @@ class UserModel
         return [];
     }
 
+    public function getUserIdByEmail($userEmail): array
+    {
+        if ($this->validateEmail($userEmail) !== false) {
+            $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `email` = :email;");
+            $query->bindParam(':email', $userEmail);
+            $query->execute();
+            return $query->fetch();
+        }
+        return [];
+    }
+
     /**
      * Verifies user credentials by comparing form input with email and hashed password in database
      */

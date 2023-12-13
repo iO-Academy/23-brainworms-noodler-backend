@@ -19,10 +19,14 @@ class RegisterController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $data = ['success' => true, 'msg' => 'Added new user to database', 'data' => []];
         $parsedBody = $request->getParsedBody();
+        $email = $parsedBody['email'];
+        $hashedPassword = password_hash($parsedBody['password'], PASSWORD_DEFAULT);
 
-       $data['userId'] = $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $parsedBody['email'], $parsedBody['password']);
+        $newUserId = $this->userModel->insertNewUserToDb($parsedBody['username'], $parsedBody['description'], $email, $hashedPassword);
+
+        $data = ['success' => true, 'msg' => 'Added new user to database', 'userId' => $newUserId];
+
         return $this->respondWithJson($response, $data);
     }
 }
