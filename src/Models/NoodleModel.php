@@ -17,7 +17,7 @@ class NoodleModel
 
     public function getNoodlesByUserId($id): array
     {
-        $query = $this->db->prepare("SELECT `id`, `time`, `noodle` FROM `noodles` WHERE `user_id` = :userId;");
+        $query = $this->db->prepare("SELECT `id`, `time`, `noodle` FROM `noodles` WHERE `user_id` = :userId ORDER BY `time` DESC;");
         $query->bindParam(':userId', $id);
         $query->setFetchMode(PDO::FETCH_CLASS, NoodleEntity::class);
         $query->execute();
