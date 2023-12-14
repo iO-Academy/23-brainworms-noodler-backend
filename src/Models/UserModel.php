@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models;
 
 use App\Entities\UserEntity;
@@ -28,7 +27,7 @@ class UserModel
             $query->bindParam(':email', $userEmail);
             $query->execute();
             $result = $query->fetch();
-            if($result) {
+            if ($result) {
                 return $result;
             } else {
                 return [];
@@ -45,7 +44,7 @@ class UserModel
             $query->bindParam(':username', $username);
             $query->execute();
             $result = $query->fetch();
-            if($result) {
+            if ($result) {
                 return $result;
             } else {
                 return [];
