@@ -36,6 +36,9 @@ class UserModel
         return [];
     }
 
+    /**
+     * Gets user if email email or username already exists.
+     */
     public function getUserByEmailOrUsername($userEmail, $username): array
     {
         if ($this->validateEmail($userEmail) !== false) {
@@ -52,7 +55,6 @@ class UserModel
         }
         return [];
     }
-
 
     /**
      * Verifies user credentials by comparing form input with email and hashed password in database

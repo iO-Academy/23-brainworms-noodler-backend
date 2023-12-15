@@ -44,7 +44,6 @@ class RegisterController extends Controller
                 $data = ['success' => true, 'msg' => 'Added new user to database', 'userId' => $newUserId];
                 $statusCode = 200;
             }
-
         } elseif ($checkEmailOrUsernameExist['email'] === $email) {
             $data['msg'] = 'Email already used';
         } elseif ($checkEmailOrUsernameExist['username'] === $username) {
